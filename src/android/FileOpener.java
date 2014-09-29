@@ -158,17 +158,17 @@ public class FileOpener extends CordovaPlugin {
             final String extension = fileUrl.substring(fileUrl.lastIndexOf("."));
             final File tempFile = new File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), filename);
 
-            //if (tempFile.exists()) {
-            //     try{
-                 	
-            //        openFile(Uri.fromFile(tempFile),extension,context,callbackContext);
-            //    }
-            //    catch(JSONException e)
-            //    {
-            //        e.printStackTrace();
-            //    }
-            //    return;
-            //}
+            if (tempFile.exists()) {
+                 try{
+                 tempFile.delete();	
+                    //openFile(Uri.fromFile(tempFile),extension,context,callbackContext);
+                }
+                catch(JSONException e)
+                {
+                    e.printStackTrace();
+                }
+                // return;
+            }
 
             DownloadManager.Request r = new DownloadManager.Request(Uri.parse(fileUrl));
             r.setDestinationInExternalFilesDir(context, Environment.DIRECTORY_DOWNLOADS, filename);
