@@ -21,7 +21,7 @@ import android.app.DownloadManager;
 import android.content.BroadcastReceiver;
 import android.content.IntentFilter;
 import android.database.Cursor;
-
+import android.util.Log;
 import android.content.ActivityNotFoundException;
 
 /**
@@ -157,9 +157,10 @@ public class FileOpener extends CordovaPlugin {
             final String filename = fileUrl.substring(fileUrl.lastIndexOf("/") + 1);
             final String extension = fileUrl.substring(fileUrl.lastIndexOf("."));
             final File tempFile = new File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), filename);
-
+Log.i("tempFile",tempFile.getAbsolutePath()+"???"+tempFile.getName());
             if (tempFile.exists()) {
                  try{
+                 Log.i("tempFile1",tempFile.getAbsolutePath()+"???"+tempFile.getName());	
                  tempFile.delete();	
                     //openFile(Uri.fromFile(tempFile),extension,context,callbackContext);
                 }
