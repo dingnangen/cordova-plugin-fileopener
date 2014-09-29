@@ -21,7 +21,7 @@ import android.app.DownloadManager;
 import android.content.BroadcastReceiver;
 import android.content.IntentFilter;
 import android.database.Cursor;
-import android.util.Log;
+
 import android.content.ActivityNotFoundException;
 
 /**
