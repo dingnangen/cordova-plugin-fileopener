@@ -171,32 +171,32 @@ Log.i("tempFile",tempFile.getAbsolutePath()+"???"+tempFile.getName());
                 // return;
             }
 
-            //DownloadManager.Request r = new DownloadManager.Request(Uri.parse(fileUrl));
-            //r.setDestinationInExternalFilesDir(context, Environment.DIRECTORY_DOWNLOADS, filename);
-            //final DownloadManager dm = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
-            //BroadcastReceiver onComplete = new BroadcastReceiver() {
-            //    @Override
-            //    public void onReceive(Context context, Intent intent) {
+            DownloadManager.Request r = new DownloadManager.Request(Uri.parse(fileUrl));
+            r.setDestinationInExternalFilesDir(context, Environment.DIRECTORY_DOWNLOADS, filename);
+            final DownloadManager dm = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
+            BroadcastReceiver onComplete = new BroadcastReceiver() {
+                @Override
+                public void onReceive(Context context, Intent intent) {
 
-            //        context.unregisterReceiver(this);
+                    context.unregisterReceiver(this);
 
-            //        long downloadId = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
-            //        Cursor c = dm.query(new DownloadManager.Query().setFilterById(downloadId));
+                    long downloadId = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
+                    Cursor c = dm.query(new DownloadManager.Query().setFilterById(downloadId));
 
-            //        if (c.moveToFirst()) {
-            //            int status = c.getInt(c.getColumnIndex(DownloadManager.COLUMN_STATUS));
-            //            if (status == DownloadManager.STATUS_SUCCESSFUL)
-            //                try{
-            //                   openFile(Uri.fromFile(tempFile),extension,context,callbackContext);
-            //                }
-            //                catch(JSONException e){e.printStackTrace(); }
-            //        }
-            //        c.close();
-            //    }
-            //};
-            //context.registerReceiver(onComplete, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+                    if (c.moveToFirst()) {
+                        int status = c.getInt(c.getColumnIndex(DownloadManager.COLUMN_STATUS));
+                        if (status == DownloadManager.STATUS_SUCCESSFUL)
+                            try{
+                               openFile(Uri.fromFile(tempFile),extension,context,callbackContext);
+                            }
+                            catch(JSONException e){e.printStackTrace(); }
+                    }
+                    c.close();
+                }
+            };
+            context.registerReceiver(onComplete, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
 
-            //dm.enqueue(r);
+            dm.enqueue(r);
         }
 
 }
