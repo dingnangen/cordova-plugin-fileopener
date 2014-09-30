@@ -158,10 +158,10 @@ public class FileOpener extends CordovaPlugin {
             final String extension = fileUrl.substring(fileUrl.lastIndexOf("."));
             final File tempFile = new File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), filename);
 // //Log.i("tempFile",tempFile.getAbsolutePath()+"???"+tempFile.getName());
-//             if (tempFile.exists()) {
+            if (tempFile.exists()) {
 //                  try{
 //                 // Log.i("tempFile1",tempFile.getAbsolutePath()+"???"+tempFile.getName());	
-//                  tempFile.delete();	
+                 tempFile.delete();	
 //                     //openFile(Uri.fromFile(tempFile),extension,context,callbackContext);
 //                 }
 //                 catch(JSONException e)
@@ -169,7 +169,7 @@ public class FileOpener extends CordovaPlugin {
 //                     e.printStackTrace();
 //                 }
 //                 // return;
-//             }
+            }
 
             DownloadManager.Request r = new DownloadManager.Request(Uri.parse(fileUrl));
             r.setDestinationInExternalFilesDir(context, Environment.DIRECTORY_DOWNLOADS, filename);
